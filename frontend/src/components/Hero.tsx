@@ -61,7 +61,6 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Staggered fade-up for all data-animate elements
     const elements = ref.current?.querySelectorAll("[data-animate]");
     elements?.forEach((el, i) => {
       const htmlEl = el as HTMLElement;
@@ -76,7 +75,6 @@ export default function Hero() {
       });
     });
 
-    // Counter animation for metric values
     const metricEls = ref.current?.querySelectorAll("[data-counter]");
     metricEls?.forEach((el) => {
       const htmlEl = el as HTMLElement;
@@ -98,7 +96,6 @@ export default function Hero() {
         else htmlEl.textContent = target;
       };
 
-      // Trigger when metrics band comes into view
       const obs = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
           requestAnimationFrame(step);
@@ -108,13 +105,11 @@ export default function Hero() {
       obs.observe(htmlEl);
     });
 
-    // Dashboard shell float animation
     const shell = ref.current?.querySelector(".db-shell-wrap") as HTMLElement;
     if (shell) {
       shell.style.animation = "db-float 5s ease-in-out infinite";
     }
 
-    // Progress bar fill animation
     const progressFill = ref.current?.querySelector(".db-progress-fill") as HTMLElement;
     if (progressFill) {
       progressFill.style.width = "0%";
@@ -124,7 +119,6 @@ export default function Hero() {
       }, 100);
     }
 
-    // Bar fills in table
     const barFills = ref.current?.querySelectorAll<HTMLElement>(".db-bar-fill");
     barFills?.forEach((bar) => {
       const targetWidth = bar.style.width;
@@ -135,7 +129,6 @@ export default function Hero() {
       }, 100);
     });
 
-    // Toast slide up
     const toast = ref.current?.querySelector(".db-toast") as HTMLElement;
     if (toast) {
       toast.style.opacity = "0";
@@ -158,17 +151,14 @@ export default function Hero() {
           0%, 100% { transform: translateY(0px); }
           50%       { transform: translateY(-8px); }
         }
-
         @keyframes live-pulse {
           0%, 100% { opacity: 1; }
           50%       { opacity: 0.4; }
         }
-
         @keyframes badge-glow {
           0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
           50%       { box-shadow: 0 0 12px 2px rgba(74,222,128,0.25); }
         }
-
         @keyframes ticker-scroll {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
@@ -182,7 +172,6 @@ export default function Hero() {
           font-family: 'Manrope', sans-serif;
           position: relative;
         }
-
         .hero-watermark-logo {
           position: fixed;
           top: 0; left: 50%;
@@ -193,7 +182,6 @@ export default function Hero() {
           user-select: none; pointer-events: none;
           z-index: 0;
         }
-
         .hero-badge {
           display: inline-flex; align-items: center; gap: 8px;
           background: rgba(105,246,184,0.3); border-radius: 9999px;
@@ -203,7 +191,6 @@ export default function Hero() {
         }
         .hero-badge-dot { color: #4ade80; font-size: 13px; }
         .hero-badge-text { color: #aaa; font-size: 13px; }
-
         .hero-title {
           color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: clamp(28px,5vw,60px); font-weight: 400;
@@ -222,7 +209,6 @@ export default function Hero() {
           position: relative; z-index: 3;
         }
         .hero-subtitle-bold { font-weight: 700; font-size: 22px; line-height: 1.4; color: #fff; }
-
         .hero-cta-group {
           display: flex; gap: 10px; margin-bottom: 56px;
           flex-wrap: wrap; justify-content: center;
@@ -243,13 +229,11 @@ export default function Hero() {
           cursor: pointer; transition: opacity 0.2s, transform 0.2s;
         }
         .hero-btn-secondary:hover { opacity: 0.85; transform: translateY(-2px); }
-
         .hero-visual-wrap {
           position: relative; width: 100%;
           display: flex; flex-direction: column; align-items: center;
           margin-bottom: 60px; z-index: 3;
         }
-
         .db-shell-wrap {
           position: relative; width: 100%; max-width: 900px; z-index: 3;
         }
@@ -325,7 +309,7 @@ export default function Hero() {
         }
         .db-footer-name { color: #cbd5e1; font-size: 9px; font-weight: 600; font-family: 'Manrope', sans-serif; }
         .db-footer-role { color: #475569; font-size: 8px; font-family: 'Manrope', sans-serif; }
-        .db-main { flex: 1; background: #f8fafc; display: flex; flex-direction: column; overflow: hidden; }
+        .db-main { flex: 1; background: #f8fafc; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
         .db-topbar {
           background: #fff; border-bottom: 1px solid #e2e8f0;
           padding: 8px 16px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
@@ -468,32 +452,115 @@ export default function Hero() {
           border-radius: 50%; background: #00C96B; flex-shrink: 0;
         }
         .ticker-item:last-child::after { display: none; }
+
+        /* ===================== MOBILE FIXES ===================== */
+        @media (max-width: 768px) {
+          .hero-section { padding: 28px 1rem 0; }
+
+          .hero-subtitle { font-size: 15px; }
+          .hero-subtitle-bold { font-size: 17px; }
+
+          /* CTA buttons: full width, stacked, rounded rect */
+          .hero-cta-group {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            margin-bottom: 36px;
+            padding: 0;
+            width: 100%;
+            max-width: 100%;
+          }
+          .hero-btn-primary {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 14px;
+            height: 56px;
+          }
+          .hero-btn-secondary {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 14px;
+            height: 56px;
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.25);
+          }
+
+          .hero-visual-wrap { margin-bottom: 36px; }
+
+          /* Dashboard: natural height */
+          .db-inner { height: auto; }
+
+          /* Hide sidebar completely */
+          .db-sidebar { display: none !important; }
+
+          /* Main takes full width */
+          .db-main { width: 100%; }
+
+          /* Hide search bar */
+          .db-search { display: none; }
+
+          /* Topbar: push to right */
+          .db-topbar { justify-content: flex-end; }
+
+          /* Stats: 2x2 grid */
+          .db-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+
+          /* Bottom panels: stack vertically */
+          .db-bottom { grid-template-columns: 1fr; gap: 8px; }
+
+          /* Table: hide Type, Date, Size columns */
+          .db-col-type, .db-col-date, .db-col-size { display: none !important; }
+
+          /* Toast: pull out of absolute, sit at bottom of shell */
+          .db-toast {
+            position: relative;
+            bottom: auto; left: auto;
+            width: 100%;
+            min-width: unset;
+            margin-top: 8px;
+            border-radius: 0 0 12px 12px;
+          }
+
+          /* Metrics: 2-col grid, 5th item spans full width centered */
+          .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px 16px;
+            padding: 28px 24px;
+          }
+          .metric-item:last-child {
+            grid-column: 1 / -1;
+            justify-self: center;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .db-stat-value { font-size: 15px; }
+          .db-content { padding: 10px 8px; }
+          .hero-metrics { gap: 18px 12px; padding: 22px 16px; }
+        }
       `}</style>
 
-      {/* Watermark */}
       <img src="/migrateai.svg" alt="" className="hero-watermark-logo" aria-hidden="true" />
 
-      {/* Badge */}
       <div className="hero-badge" data-animate>
         <span className="hero-badge-dot">✦</span>
         <span className="hero-badge-text">Now with 8 AI Modules — v5.0 Released</span>
       </div>
 
-      {/* Heading */}
       <h1 className="hero-title" data-animate>
         The World's First{" "}
         <span className="hero-title-accent">AI–Powered WordPress Backup & Migration</span>{" "}
         Plugin
       </h1>
 
-      {/* Subtitle */}
       <p className="hero-subtitle" data-animate>
         <span className="hero-subtitle-bold">MigrateAI doesn't just backup your site — it understands it.</span>{" "}
         Predicts conflicts before they happen, detects anomalies in real time,
         guides migrations in plain English, and recovers your site in under 60 seconds when things go wrong.
       </p>
 
-      {/* CTA */}
       <div className="hero-cta-group" data-animate>
         <button className="hero-btn-primary">
           <span>Download Free Plugin</span>
@@ -502,7 +569,6 @@ export default function Hero() {
         <button className="hero-btn-secondary">Explore All Features →</button>
       </div>
 
-      {/* Dashboard */}
       <div className="hero-visual-wrap" data-animate>
         <div className="db-shell-wrap">
           <div className="db-deco-card" />
@@ -597,7 +663,14 @@ export default function Hero() {
                       </div>
                       <table className="db-table">
                         <thead>
-                          <tr>{["Name","Type","Date","Size","Status","Health"].map((h) => <th key={h}>{h}</th>)}</tr>
+                          <tr>
+                            <th>Name</th>
+                            <th className="db-col-type">Type</th>
+                            <th className="db-col-date">Date</th>
+                            <th className="db-col-size">Size</th>
+                            <th>Status</th>
+                            <th>Health</th>
+                          </tr>
                         </thead>
                         <tbody>
                           {backups.map((row) => {
@@ -605,9 +678,9 @@ export default function Hero() {
                             return (
                               <tr key={row.name}>
                                 <td><div className="db-name-cell">{row.name}</div></td>
-                                <td>{row.type}</td>
-                                <td style={{ whiteSpace: "pre-line", lineHeight: 1.3 }}>{row.date}</td>
-                                <td>{row.size}</td>
+                                <td className="db-col-type">{row.type}</td>
+                                <td className="db-col-date" style={{ whiteSpace: "pre-line", lineHeight: 1.3 }}>{row.date}</td>
+                                <td className="db-col-size">{row.size}</td>
                                 <td>
                                   <span className="db-status-pill" style={{ background: st.bg, color: st.text }}>
                                     <span className="db-status-dot" style={{ background: st.text }} />
@@ -643,7 +716,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Metrics band */}
       <div className="hero-metrics" data-animate>
         {metricItems.map((m) => (
           <div key={m.label} className="metric-item">
@@ -653,7 +725,6 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Ticker band */}
       <div className="ticker-band" data-animate>
         <div className="ticker-track">
           {tickerDuped.map((item, i) => (
@@ -661,7 +732,6 @@ export default function Hero() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }

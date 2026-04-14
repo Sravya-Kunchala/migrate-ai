@@ -76,15 +76,45 @@ export default function CoreBackupFeatures() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        /* Desktop default — 3 column grid */
+        .cbf-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 40px 48px;
+        }
+
+        .cbf-section {
+          padding: 72px 54px;
+        }
+
+        /* Tablet — 2 columns */
+        @media (max-width: 900px) {
+          .cbf-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px 32px;
+          }
+          .cbf-section {
+            padding: 56px 32px;
+          }
+        }
+
+        /* Mobile — 1 column */
+        @media (max-width: 540px) {
+          .cbf-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+          .cbf-section {
+            padding: 40px 20px;
+          }
+        }
       `}</style>
 
       <section
+        className="cbf-section"
         style={{
           background: "#0a0f0c",
-         paddingTop: "72px",
-paddingBottom: "72px",
-paddingLeft: "54px",
-paddingRight: "54px",
           fontFamily: "'Plus Jakarta Sans', sans-serif",
         }}
       >
@@ -121,13 +151,7 @@ paddingRight: "54px",
         />
 
         {/* Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "40px 48px",
-          }}
-        >
+        <div className="cbf-grid">
           {features.map((feature, index) => (
             <div
               key={feature.title}

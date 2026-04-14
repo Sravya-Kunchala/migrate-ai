@@ -56,11 +56,45 @@ export default function TrustedSection() {
           margin: 0 28px;
         }
 
+        /* ── MOBILE FIXES ── */
         @media (max-width: 768px) {
-          .ts-logos-row { flex-wrap: wrap !important; row-gap: 20px !important; }
+
+          /* Section padding */
+          .ts-section {
+            padding: 48px 20px !important;
+          }
+
+          /* Title: scale down font, fix line-height */
+          .ts-title-text {
+            font-size: 20px !important;
+            line-height: 1.4 !important;
+            letter-spacing: 2px !important;
+          }
+
+          /* Partners: wrap into 2×2 grid */
+          .ts-logos-row {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px 0 !important;
+            justify-items: center !important;
+          }
+
+          /* Hide all dividers on mobile */
           .ts-divider { display: none !important; }
-          .ts-partner { font-size: 18px !important; }
-          .ts-stats-text { font-size: 15px !important; line-height: 24px !important; }
+
+          /* Partner font size */
+          .ts-partner { font-size: 17px !important; line-height: 24px !important; }
+
+          /* Stats text */
+          .ts-stats-text {
+            font-size: 14px !important;
+            line-height: 24px !important;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .ts-partner { font-size: 14px !important; }
+          .ts-title-text { font-size: 17px !important; letter-spacing: 1.5px !important; }
         }
       `}</style>
 
@@ -69,6 +103,7 @@ export default function TrustedSection() {
         {/* Title */}
         <div className="ts-title" style={{ marginBottom: 32 }}>
           <p
+            className="ts-title-text"
             style={{
               margin: 0,
               fontFamily: "'DM Sans', sans-serif",
@@ -122,6 +157,7 @@ export default function TrustedSection() {
             2,400,000+ active installations. Used by agencies, eCommerce stores, news publishers, and individual developers across 140+ countries.
           </p>
         </div>
+
       </div>
     </section>
   );

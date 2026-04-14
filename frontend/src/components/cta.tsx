@@ -63,6 +63,7 @@ export default function MigrateCTASection() {
           cursor: pointer;
           text-decoration: none;
           white-space: nowrap;
+          border: 1px solid rgba(255,255,255,0.2);
           transition: background 0.2s ease, transform 0.15s ease;
         }
         .cta-btn-secondary:hover {
@@ -83,11 +84,38 @@ export default function MigrateCTASection() {
           z-index: 0;
         }
 
+        /* ── MOBILE ── */
         @media (max-width: 640px) {
-          .cta-card { padding: 40px 24px !important; }
-          .cta-title { font-size: 36px !important; line-height: 40px !important; }
-          .cta-buttons { flex-direction: column !important; gap: 12px !important; }
-          .cta-btn-primary, .cta-btn-secondary { width: 100% !important; padding: 20px 32px !important; }
+          .cta-card {
+            padding: 36px 20px !important;
+            border-radius: 16px !important;
+          }
+          .cta-title {
+            font-size: 28px !important;
+            line-height: 36px !important;
+            white-space: normal !important;
+            margin-bottom: 14px !important;
+          }
+          .cta-desc {
+            font-size: 14px !important;
+            line-height: 22px !important;
+            margin-bottom: 28px !important;
+          }
+          .cta-buttons {
+            flex-direction: column !important;
+            gap: 12px !important;
+            width: 100%;
+          }
+          .cta-btn-primary {
+            width: 100% !important;
+            padding: 16px 24px !important;
+            font-size: 15px !important;
+          }
+          .cta-btn-secondary {
+            width: 100% !important;
+            padding: 16px 24px !important;
+            font-size: 15px !important;
+          }
         }
       `}</style>
 

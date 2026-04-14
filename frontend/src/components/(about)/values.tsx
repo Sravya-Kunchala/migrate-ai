@@ -42,6 +42,7 @@ export default function ValuesThatDriveUs() {
     <section style={{ background: "#0a0d0f", width: "100%" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap');
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
@@ -50,29 +51,101 @@ export default function ValuesThatDriveUs() {
           from { opacity: 0; transform: scale(0.5); }
           to { opacity: 1; transform: scale(1); }
         }
+
         .val-header { animation: fadeUp 0.6s ease both; }
-        .val-card { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-        .val-card:hover { transform: translateY(-6px); border-color: rgba(0,201,107,0.35) !important; box-shadow: 0 12px 32px rgba(0,201,107,0.08); }
+        .val-card {
+          transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .val-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(0,201,107,0.35) !important;
+          box-shadow: 0 12px 32px rgba(0,201,107,0.08);
+        }
         .val-c0 { animation: fadeUp 0.6s 0.1s ease both; }
         .val-c1 { animation: fadeUp 0.6s 0.2s ease both; }
         .val-c2 { animation: fadeUp 0.6s 0.3s ease both; }
         .val-c3 { animation: fadeUp 0.6s 0.4s ease both; }
         .val-icon { animation: iconPop 0.5s 0.5s ease both; }
+
+        /* Desktop default — 4 columns */
+        .val-inner {
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 72px 48px;
+        }
+
+        .val-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+
+        /* Tablet — 2x2 */
+        @media (max-width: 900px) {
+          .val-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+          }
+          .val-inner {
+            padding: 56px 32px;
+          }
+        }
+
+        /* Mobile — 1 column */
+        @media (max-width: 540px) {
+          .val-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+          .val-inner {
+            padding: 40px 20px;
+          }
+        }
       `}</style>
-      <div style={{ maxWidth: 960, margin: "0 auto", padding: "72px 48px" }}>
+
+      <div className="val-inner">
         <div className="val-header" style={{ textAlign: "center", marginBottom: 48 }}>
-          <h2 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 10px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Values that Drive Us</h2>
-          <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>The principles we live by, every single commit.</p>
+          <h2 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 10px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            Values that Drive Us
+          </h2>
+          <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>
+            The principles we live by, every single commit.
+          </p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+
+        <div className="val-grid">
           {values.map((v, i) => (
-            <div key={i} className={`val-card val-c${i}`} style={{ background: "#111720", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 14, padding: "28px 22px", display: "flex", flexDirection: "column", gap: 16 }}>
-              <div className="val-icon" style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(0,201,107,0.08)", border: "1px solid rgba(0,201,107,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div
+              key={i}
+              className={`val-card val-c${i}`}
+              style={{
+                background: "#111720",
+                border: "1px solid rgba(255,255,255,0.07)",
+                borderRadius: 14,
+                padding: "28px 22px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+              }}
+            >
+              <div
+                className="val-icon"
+                style={{
+                  width: 40, height: 40, borderRadius: 10,
+                  background: "rgba(0,201,107,0.08)",
+                  border: "1px solid rgba(0,201,107,0.15)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
                 {v.icon}
               </div>
               <div>
-                <h3 style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 8px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>{v.title}</h3>
-                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, margin: 0, fontFamily: "'DM Sans', sans-serif" }}>{v.desc}</p>
+                <h3 style={{ fontSize: 14, fontWeight: 700, color: "#fff", margin: "0 0 8px", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  {v.title}
+                </h3>
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, margin: 0, fontFamily: "'DM Sans', sans-serif" }}>
+                  {v.desc}
+                </p>
               </div>
             </div>
           ))}

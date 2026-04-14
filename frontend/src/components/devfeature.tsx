@@ -99,125 +99,165 @@ export default function DevFeatures() {
           flex-shrink: 0;
         }
 
-        @media (max-width: 768px) {
-          .dev-inner { flex-direction: column !important; }
-          .dev-left, .dev-right { width: 100% !important; }
+        /* ── DESKTOP (default) ── */
+        .dev-inner {
+          display: flex;
+          flex-direction: row;
+          gap: 64px;
+          align-items: center;
         }
-        @media (max-width: 600px) {
-          .dev-section { padding: 48px 20px !important; }
-          .dev-features-grid { grid-template-columns: 1fr !important; }
+        .dev-left  { flex: 0 0 420px; width: 420px; }
+        .dev-right { flex: 1; }
+        .dev-features-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 32px;
+        }
+        .dev-section-pad {
+          padding: 56px 56px;
+        }
+        .dev-section-outer {
+          padding: 80px 48px;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+          .dev-section-outer {
+            padding: 40px 16px;
+          }
+          .dev-section-pad {
+            padding: 28px 20px;
+          }
+          .dev-inner {
+            flex-direction: column;
+            gap: 32px;
+          }
+          .dev-left {
+            flex: unset;
+            width: 100%;
+          }
+          .dev-right {
+            width: 100%;
+          }
+          .dev-features-grid {
+            grid-template-columns: 1fr;
+          }
+          .dev-title {
+            font-size: 26px !important;
+          }
+          .dev-code-text {
+            font-size: 11px !important;
+            overflow-x: auto;
+          }
+          .dev-code-block {
+            overflow-x: auto;
+          }
         }
       `}</style>
 
-      <div
-        className="dev-section"
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          background: "#161b22",
-          border: "1px solid #21262d",
-          borderRadius: 20,
-          padding: "56px 56px",
-          display: "flex",
-          gap: 64,
-          alignItems: "center",
-        }}
-        className="dev-inner"
-      >
-        {/* Left */}
-        <div className="dev-left" style={{ flex: "0 0 420px" }}>
-          {/* Tag */}
-          <p style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: "1.2px",
-            textTransform: "uppercase",
-            color: "#00C96B",
-            margin: "0 0 16px",
-          }}>
-            For Architects
-          </p>
-
-          {/* Title */}
-          <h2 style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 36,
-            fontWeight: 800,
-            color: "#ffffff",
-            margin: "0 0 12px",
-            lineHeight: 1.2,
-          }}>
-            Developer Features
-          </h2>
-
-          {/* Subtitle */}
-          <p style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 15,
-            color: "#8b949e",
-            margin: "0 0 36px",
-            lineHeight: 1.6,
-          }}>
-            Built for scale, extensibility, and modern dev workflows.
-          </p>
-
-          {/* Features grid — 2 columns */}
-          <div
-            className="dev-features-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              columnGap: 32,
-            }}
-          >
-            {features.map((f) => (
-              <div key={f.label} className="dev-feature-item">
-                <div className="dev-icon-wrap">{f.icon}</div>
-                <span>{f.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right — code block */}
-        <div className="dev-right" style={{ flex: 1 }}>
-          <div style={{
-            background: "#0d1117",
-            border: "1px solid #30363d",
-            borderRadius: 14,
-            overflow: "hidden",
-          }}>
-            {/* Traffic lights */}
-            <div style={{
-              display: "flex",
-              gap: 7,
-              padding: "14px 16px",
-              borderBottom: "1px solid #21262d",
+      <div className="dev-section-outer" style={{ background: "#0d1117", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+        <div
+          className="dev-section dev-inner dev-section-pad"
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            background: "#161b22",
+            border: "1px solid #21262d",
+            borderRadius: 20,
+          }}
+        >
+          {/* Left */}
+          <div className="dev-left">
+            {/* Tag */}
+            <p style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "1.2px",
+              textTransform: "uppercase",
+              color: "#00C96B",
+              margin: "0 0 16px",
             }}>
-              <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#ff5f57" }} />
-              <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#febc2e" }} />
-              <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#28c840" }} />
-            </div>
+              For Architects
+            </p>
 
-            {/* Code */}
-            <div style={{ padding: "20px 24px" }}>
-              {codeLines.map((line, i) => (
-                <div
-                  key={i}
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 13,
-                    lineHeight: "24px",
-                    color: line.color,
-                    whiteSpace: "pre",
-                  }}
-                >
-                  {line.text}
-                  {line.highlight && (
-                    <span style={{ color: line.highlightColor }}>{line.highlight}</span>
-                  )}
+            {/* Title */}
+            <h2 className="dev-title" style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 36,
+              fontWeight: 800,
+              color: "#ffffff",
+              margin: "0 0 12px",
+              lineHeight: 1.2,
+            }}>
+              Developer Features
+            </h2>
+
+            {/* Subtitle */}
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 15,
+              color: "#8b949e",
+              margin: "0 0 36px",
+              lineHeight: 1.6,
+            }}>
+              Built for scale, extensibility, and modern dev workflows.
+            </p>
+
+            {/* Features grid */}
+            <div className="dev-features-grid">
+              {features.map((f) => (
+                <div key={f.label} className="dev-feature-item">
+                  <div className="dev-icon-wrap">{f.icon}</div>
+                  <span>{f.label}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Right — code block */}
+          <div className="dev-right">
+            <div
+              className="dev-code-block"
+              style={{
+                background: "#0d1117",
+                border: "1px solid #30363d",
+                borderRadius: 14,
+                overflow: "hidden",
+              }}
+            >
+              {/* Traffic lights */}
+              <div style={{
+                display: "flex",
+                gap: 7,
+                padding: "14px 16px",
+                borderBottom: "1px solid #21262d",
+              }}>
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#ff5f57" }} />
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#febc2e" }} />
+                <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#28c840" }} />
+              </div>
+
+              {/* Code */}
+              <div style={{ padding: "20px 24px", overflowX: "auto" }}>
+                {codeLines.map((line, i) => (
+                  <div
+                    key={i}
+                    className="dev-code-text"
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 13,
+                      lineHeight: "24px",
+                      color: line.color,
+                      whiteSpace: "pre",
+                    }}
+                  >
+                    {line.text}
+                    {line.highlight && (
+                      <span style={{ color: line.highlightColor }}>{line.highlight}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

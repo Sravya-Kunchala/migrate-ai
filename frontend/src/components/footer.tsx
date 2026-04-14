@@ -22,12 +22,18 @@ export default function Footer() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Manrope:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap');
         * { box-sizing: border-box; }
+
         .f-link {
-          display: block; font-size: 13px; color: #6b7280;
-          text-decoration: none; padding: 3px 0;
-          transition: color .2s; cursor: pointer;
+          display: block;
+          font-size: 13px;
+          color: #6b7280;
+          text-decoration: none;
+          padding: 3px 0;
+          transition: color .2s;
+          cursor: pointer;
         }
         .f-link:hover { color: #d1d5db; }
+
         .f-social-btn {
           width: 36px; height: 36px; border-radius: 8px;
           border: 1px solid #1f2937; background: #111827;
@@ -36,31 +42,100 @@ export default function Footer() {
           flex-shrink: 0;
         }
         .f-social-btn:hover { border-color: #00C96B; }
+
         .f-legal-link {
           font-family: 'DM Sans', sans-serif;
-          font-size: 12px; font-weight: 500; color: #ffffff;
-          line-height: 24px; letter-spacing: 0px;
-          text-decoration: none; transition: color .2s; cursor: pointer;
+          font-size: 12px;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 24px;
+          text-decoration: none;
+          transition: color .2s;
+          cursor: pointer;
+          white-space: nowrap;
         }
         .f-legal-link:hover { color: #9ca3af; }
+
+        /* ── Desktop (default) ── */
         .f-main {
-          max-width: 1200px; margin: 0 auto;
-          padding: 56px 8px 40px;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 56px 32px 40px;
           display: grid;
           grid-template-columns: 220px repeat(4, 1fr);
           gap: 16px;
         }
+
+        .f-brand { grid-column: auto; }
+        .f-cols { display: contents; }
+
         .f-bottom {
-          width: 100%;
-          padding: 20px 74px;
-          display: flex; justify-content: space-between; align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px 32px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
-        @media (max-width: 720px) {
-          .f-main { grid-template-columns: 1fr 1fr !important; gap: 24px; }
+
+        .f-bottom-copyright {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 12px;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 24px;
+          white-space: nowrap;
+        }
+
+        .f-bottom-links {
+          display: flex;
+          gap: 24px;
+          flex-shrink: 0;
+        }
+
+        /* ── Tablet ── */
+        @media (max-width: 900px) {
+          .f-main {
+            grid-template-columns: 1fr 1fr 1fr !important;
+            gap: 32px 24px;
+            padding: 40px 24px 32px;
+          }
           .f-brand { grid-column: 1 / -1; }
+          .f-bottom { padding: 20px 24px; }
         }
-        @media (max-width: 480px) {
-          .f-main { grid-template-columns: 1fr !important; }
+
+        /* ── Mobile ── */
+        @media (max-width: 600px) {
+          .f-main {
+            display: flex !important;
+            flex-direction: column;
+            gap: 0;
+            padding: 32px 16px 28px;
+          }
+          .f-brand { margin-bottom: 32px; }
+          .f-cols {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px 16px;
+          }
+
+          /* Bottom bar: stack copyright on top, links below */
+          .f-bottom {
+            padding: 14px 16px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+          }
+          .f-bottom-copyright {
+            font-size: 12px;
+            white-space: normal;
+          }
+          .f-bottom-links {
+            gap: 20px;
+          }
+          .f-legal-link {
+            font-size: 12px;
+          }
         }
       `}</style>
 
@@ -82,7 +157,7 @@ export default function Footer() {
               MigrateAI
             </span>
           </div>
-          <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.7, marginTop: 12 }}>
+          <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.7, marginTop: 12, maxWidth: 320 }}>
             AI-powered WordPress backup, migration, and restore platform with intelligent
             automation, conflict prediction, and real-time recovery.
           </p>
@@ -100,43 +175,43 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Product */}
-        <div>
-          <ColTitle>Product</ColTitle>
-          <a className="f-link">Features</a>
-          <a className="f-link">How It Works</a>
-          <a className="f-link">Pricing</a>
+        {/* 4 link columns — 2x2 on mobile */}
+        <div className="f-cols">
+          <div>
+            <ColTitle>Product</ColTitle>
+            <a className="f-link">Features</a>
+            <a className="f-link">How It Works</a>
+            <a className="f-link">Pricing</a>
+          </div>
+
+          <div>
+            <ColTitle>AI Modules</ColTitle>
+            <a className="f-link">AI Migration Assistant</a>
+            <a className="f-link">Smart Backup Engine</a>
+            <a className="f-link">Conflict Predictor</a>
+            <a className="f-link">Restore Advisor</a>
+            <a className="f-link">Anomaly Detector</a>
+            <a className="f-link">Smart Scheduler</a>
+            <a className="f-link">AI Report Generator</a>
+            <a className="f-link">NLP Command Parser</a>
+          </div>
+
+          <div>
+            <ColTitle>Docs</ColTitle>
+            <a className="f-link">Overview</a>
+            <a className="f-link">Backup</a>
+            <a className="f-link">Migration</a>
+            <a className="f-link">Restore</a>
+            <a className="f-link">API</a>
+          </div>
+
+          <div>
+            <ColTitle>Company</ColTitle>
+            <a className="f-link">About</a>
+            <a className="f-link">Contact</a>
+          </div>
         </div>
 
-        {/* AI Modules */}
-        <div>
-          <ColTitle>AI Modules</ColTitle>
-          <a className="f-link">AI Migration Assistant</a>
-          <a className="f-link">Smart Backup Engine</a>
-          <a className="f-link">Conflict Predictor</a>
-          <a className="f-link">Restore Advisor</a>
-          <a className="f-link">Anomaly Detector</a>
-          <a className="f-link">Smart Scheduler</a>
-          <a className="f-link">AI Report Generator</a>
-          <a className="f-link">NLP Command Parser</a>
-        </div>
-
-        {/* Docs */}
-        <div>
-          <ColTitle>Docs</ColTitle>
-          <a className="f-link">Overview</a>
-          <a className="f-link">Backup</a>
-          <a className="f-link">Migration</a>
-          <a className="f-link">Restore</a>
-          <a className="f-link">API</a>
-        </div>
-
-        {/* Company */}
-        <div>
-          <ColTitle>Company</ColTitle>
-          <a className="f-link">About</a>
-          <a className="f-link">Contact</a>
-        </div>
       </div>
 
       {/* Divider */}
@@ -144,23 +219,16 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="f-bottom">
-        <span style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: 12,
-          fontWeight: 500,
-          color: "#ffffff",
-          lineHeight: "24px",
-          letterSpacing: 0,
-        }}>
+        <span className="f-bottom-copyright">
           © 2026 MigrateAI. All rights reserved.
         </span>
-        <div style={{ display: "flex", gap: 24 }}>
+        <div className="f-bottom-links">
           <a className="f-legal-link">Privacy Policy</a>
           <a className="f-legal-link">Terms of Service</a>
         </div>
       </div>
 
-      {/* Full-width m1.svg wordmark */}
+      {/* Full-width wordmark */}
       <div style={{
         width: "100%",
         overflow: "hidden",
@@ -173,12 +241,7 @@ export default function Footer() {
         <img
           src="/m1.svg"
           alt="MigrateAI"
-          style={{
-            width: "100%",
-            height: "auto",
-            display: "block",
-            opacity: 0.5,
-          }}
+          style={{ width: "100%", height: "auto", display: "block", opacity: 0.5 }}
         />
       </div>
     </footer>

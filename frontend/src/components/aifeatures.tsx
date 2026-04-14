@@ -215,7 +215,7 @@ export default function AIFeatures() {
         .mock-ai-dot { width: 7px; height: 7px; border-radius: 50%; background: #00C96B; flex-shrink: 0; }
         .mock-ai-text { font-size: 13px; color: #2d5a3d; line-height: 1.65; font-style: italic; }
 
-        /* ── CONFLICT PREDICTOR CARDS — exact Figma specs ── */
+        /* ── CONFLICT PREDICTOR CARDS ── */
         .aif-predict-card {
           background: #EFF5EF;
           border-radius: 48px;
@@ -272,12 +272,108 @@ export default function AIFeatures() {
         }
         .aif-wave-bar { flex: 1; border-radius: 2px 2px 0 0; background: linear-gradient(to top, #ef4444, #f97316); }
 
+        /* ===================== MOBILE FIXES ===================== */
         @media (max-width: 768px) {
-          .aif-row { grid-template-columns: 1fr; }
+
+          /* Section padding */
+          .aif-section { padding: 48px 1rem 48px; }
+
+          /* Header */
+          .aif-header { margin-bottom: 48px; }
+          .aif-subtitle { font-size: 14px; }
+
+          /* Rows: single column, tighter gap */
+          .aif-rows { gap: 60px; }
+          .aif-row {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          /* Reversed rows: reset direction so text always comes first */
           .aif-row.reverse { direction: ltr; }
-          .aif-bottom-grid { grid-template-columns: 1fr; }
-          .aif-predict-card { width: 100%; height: auto; }
-          .mock-ai-bubble { max-width: 180px; }
+          .aif-row.reverse > * { direction: ltr; }
+
+          /* Feature title smaller */
+          .aif-feat-title { font-size: 22px; }
+          .aif-feat-desc { font-size: 14px; }
+
+          /* Stats row: tighter */
+          .aif-stats { gap: 20px; }
+          .aif-stat-value { font-size: 22px; }
+
+          /* Metric bar: allow wrapping */
+          .aif-metric-bar-wrap {
+            flex-wrap: wrap;
+            border-radius: 20px;
+            padding: 16px;
+          }
+          .aif-metric-track { flex: 1 1 100%; order: 3; }
+          .aif-metric-label { flex: 1 1 auto; }
+          .aif-metric-pct { order: 2; }
+
+          /* Migration mockup: hide sidebar, make compact */
+          .mock-sidebar { display: none; }
+          .mock-search { display: none; }
+          .mock-topbar { justify-content: flex-end; }
+
+          /* AI bubble: reposition to fit below on mobile */
+          .mock-ai-bubble {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            max-width: 100%;
+            margin-top: 16px;
+            border-radius: 20px;
+          }
+          .mock-ai-text { font-size: 12px; }
+
+          /* Row 1 visual wrapper: remove overflow+paddingBottom that reserved space for bubble */
+          .aif-row-1-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+          }
+
+          /* Conflict predictor container: full width, auto height */
+          .aif-conflict-wrap {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            padding: 16px !important;
+            gap: 8px !important;
+          }
+
+          /* Conflict cards: full width */
+          .aif-predict-card {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            padding: 16px;
+          }
+
+          /* Smart Backup image card: floating callout hide on mobile (overlaps) */
+          .aif-backup-callout { display: none; }
+
+          /* Restore advisor terminal: smaller padding */
+          .aif-restore-terminal {
+            padding: 24px !important;
+            border-radius: 24px !important;
+          }
+          .aif-restore-terminal div[style*="Courier"] {
+            font-size: 11px !important;
+          }
+
+          /* Bottom grid: single column */
+          .aif-bottom { margin-top: 60px; }
+          .aif-bottom-grid { grid-template-columns: 1fr; gap: 12px; }
+          .aif-card { min-height: auto; border-radius: 20px; padding: 18px 18px 20px; }
+          .aif-card-title { font-size: 16px; }
+          .aif-card-desc { font-size: 12px; }
+        }
+
+        @media (max-width: 400px) {
+          .aif-feat-title { font-size: 20px; }
+          .mock-ai-text { font-size: 11px; }
+          .aif-card { padding: 14px 14px 16px; }
         }
       `}</style>
 
@@ -318,10 +414,9 @@ export default function AIFeatures() {
             </div>
           </div>
 
-          {/* Coded Migration UI Mockup */}
-          <div style={{ position: "relative", paddingBottom: 20 }}>
+          {/* Row 1 visual — use className for mobile targeting */}
+          <div className="aif-row-1-visual" style={{ position: "relative", paddingBottom: 20 }}>
             <div className="mock-shell">
-              {/* Sidebar */}
               <div className="mock-sidebar">
                 <div className="mock-logo">
                   <div className="mock-logo-dot">M</div>
@@ -348,7 +443,6 @@ export default function AIFeatures() {
                 </div>
               </div>
 
-              {/* Main content */}
               <div className="mock-main">
                 <div className="mock-topbar">
                   <div className="mock-search">
@@ -372,8 +466,6 @@ export default function AIFeatures() {
                     <div className="mock-page-title">Migration</div>
                     <div className="mock-page-sub">Move your WordPress site to a new destination safely and intelligently.</div>
                   </div>
-
-                  {/* Stepper */}
                   <div className="mock-stepper">
                     {[
                       { n: "1", label: "Destination", active: true },
@@ -387,8 +479,6 @@ export default function AIFeatures() {
                       </div>
                     ))}
                   </div>
-
-                  {/* Form */}
                   <div className="mock-form-card">
                     <div>
                       <div className="mock-form-title">Destination Details</div>
@@ -404,15 +494,13 @@ export default function AIFeatures() {
                         <div className="mock-field-input">{f.placeholder}</div>
                       </div>
                     ))}
-                    <div className="mock-btn">
-                      Run Conflict Check &nbsp;›
-                    </div>
+                    <div className="mock-btn">Run Conflict Check &nbsp;›</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* AI Assistant Bubble */}
+            {/* AI Bubble — sits below on mobile via className */}
             <div className="mock-ai-bubble">
               <div className="mock-ai-label">
                 <div className="mock-ai-dot" />
@@ -449,8 +537,8 @@ export default function AIFeatures() {
           </div>
           <div style={{ position: "relative", borderRadius: 20, overflow: "visible" }}>
             <img src="/b2.svg" alt="Smart Backup Engine visual" style={{ width: "100%", height: "auto", display: "block", borderRadius: 20 }} />
-            {/* Floating Callout — 180×98, r:32, shadow x:0 y:8 blur:10 spread:-6 + x:0 y:20 blur:25 spread:-5 both #000 10% */}
-            <div style={{
+            {/* Floating callout — hidden on mobile via className */}
+            <div className="aif-backup-callout" style={{
               position: "absolute",
               top: "36%",
               right: "-16px",
@@ -508,14 +596,13 @@ export default function AIFeatures() {
             </div>
           </div>
 
-          {/* Conflict Predictor container — 544×250, radial gradient, border #2D3748 */}
-          <div style={{
+          {/* Conflict predictor container — className for mobile targeting */}
+          <div className="aif-conflict-wrap" style={{
             width: "100%",
             maxWidth: 544,
             height: 250,
             borderRadius: 28,
             border: "1px solid #2D3748",
-            opacity: 1,
             background: "radial-gradient(ellipse at center, #AAB4AD 0%, rgba(170,180,173,0) 70%)",
             backgroundColor: "#0d1117",
             display: "flex",
@@ -587,13 +674,13 @@ export default function AIFeatures() {
         {/* ── Row 4: AI Restore Advisor ── */}
         <div className="aif-row reverse">
           <div className="aif-text">
-          
             <div className="aif-feat-title" style={{ color: "#00C96B" }}>AI Restore Advisor</div>
             <div className="aif-feat-desc">
               Diagnoses exactly what broke and recommends the precise backup and restore scope to fix it.
             </div>
           </div>
-          <div style={{
+          {/* Terminal — className for mobile targeting */}
+          <div className="aif-restore-terminal" style={{
             background: "#1F2937", borderRadius: 48,
             border: "1px solid #2D3748", padding: 40,
             display: "flex", flexDirection: "column", gap: 16,
@@ -623,7 +710,6 @@ export default function AIFeatures() {
       <div className="aif-bottom">
         <div className="aif-bottom-grid">
 
-          {/* Anomaly Detector */}
           <div className="aif-card">
             <div className="aif-card-icon-wrap">
               <img src="/i1.svg" alt="" style={{ width: 17, height: 17 }} />
@@ -637,7 +723,6 @@ export default function AIFeatures() {
             </div>
           </div>
 
-          {/* Smart Scheduler */}
           <div className="aif-card" style={{ border: "1px solid rgba(0,201,107,0.3)" }}>
             <div className="aif-card-icon-wrap">
               <img src="/i2.svg" alt="" style={{ width: 17, height: 17 }} />
@@ -652,7 +737,6 @@ export default function AIFeatures() {
             </div>
           </div>
 
-          {/* AI Report Generator */}
           <div className="aif-card">
             <div className="aif-card-icon-wrap">
               <img src="/i3.svg" alt="" style={{ width: 17, height: 17 }} />
@@ -667,7 +751,6 @@ export default function AIFeatures() {
             </div>
           </div>
 
-          {/* NLP Command Parser */}
           <div className="aif-card">
             <div className="aif-card-icon-wrap">
               <img src="/i4.svg" alt="" style={{ width: 17, height: 17 }} />
