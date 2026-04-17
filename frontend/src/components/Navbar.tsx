@@ -178,17 +178,26 @@ function Navbar() {
           style={{ transform: menuOpen ? "translateX(0)" : "translateX(100%)" }}
         >
           <div className="nav-drawer-header">
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{
-                width: 30, height: 30, background: "#5b4ef8",
-                borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-              </div>
-              <span style={{ color: "#7c6ff7", fontWeight: 600, fontSize: 15 }}>MigrateAI</span>
+          <a
+            href="/"
+            onClick={() => setMenuOpen(false)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              textDecoration: "none",
+            }}
+          >
+            <div style={{
+              width: 30, height: 30, background: "#5b4ef8",
+              borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
             </div>
+            <span style={{ color: "#7c6ff7", fontWeight: 600, fontSize: 15 }}>MigrateAI</span>
+          </a>
             <button
               onClick={() => setMenuOpen(false)}
               style={{
@@ -269,7 +278,8 @@ function Navbar() {
       )}
 
       {/* Navbar */}
-      <nav style={{
+      <div aria-hidden="true" style={{ height: "64px" }} />
+        <nav style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -278,13 +288,27 @@ function Navbar() {
         background: "#0d0d0d",
         borderBottom: "0.5px solid #2a2a2a",
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        position: "sticky",
+        position: "fixed",
         top: 0,
-        zIndex: 100,
+        left: 0,
+        right: 0,
+        width: "100%",
+        zIndex: 1000,
+        isolation: "isolate",
+        boxShadow: "0 1px 0 rgba(0,0,0,0.35)",
       }}>
 
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <a
+          href="/"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            textDecoration: "none",
+          }}
+        >
           <div style={{
             width: "36px", height: "36px", background: "#5b4ef8",
             borderRadius: "10px", display: "flex",
@@ -295,7 +319,7 @@ function Navbar() {
             </svg>
           </div>
           <span style={{ color: "#7c6ff7", fontWeight: 600, fontSize: "17px" }}>MigrateAI</span>
-        </div>
+        </a>
 
         {/* Desktop nav links */}
         {!isMobile && (

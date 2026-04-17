@@ -1,3 +1,5 @@
+
+
 export default function MigrateCTASection() {
   const scrollToTop = () => {
     document.getElementById("page-top")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -31,24 +33,21 @@ export default function MigrateCTASection() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          background: #69F6B8;
+          background: #ffffff;
           color: #065F46;
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 600;
           border: none;
           border-radius: 48px;
-          padding: 24px 80px;
+          padding: 14px 28px;
           cursor: pointer;
           text-decoration: none;
           white-space: nowrap;
-          box-shadow:
-            0 8px 10px -6px rgba(0,0,0,0.10),
-            0 20px 25px -5px rgba(0,0,0,0.10);
           transition: background 0.2s ease, transform 0.15s ease;
         }
         .cta-btn-primary:hover {
-          background: #4eeea4;
+          background: #e6ffe6;
           transform: translateY(-1px);
         }
 
@@ -56,22 +55,21 @@ export default function MigrateCTASection() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          background: #065F46;
+          background: transparent;
           color: #ffffff;
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 600;
-          border: none;
           border-radius: 48px;
-          padding: 24px 48px;
+          padding: 14px 28px;
           cursor: pointer;
           text-decoration: none;
           white-space: nowrap;
-          border: 1px solid rgba(255,255,255,0.2);
+          border: 1px solid rgba(255,255,255,0.35);
           transition: background 0.2s ease, transform 0.15s ease;
         }
         .cta-btn-secondary:hover {
-          background: #054d38;
+          background: rgba(255,255,255,0.08);
           transform: translateY(-1px);
         }
 
@@ -88,15 +86,14 @@ export default function MigrateCTASection() {
           z-index: 0;
         }
 
-        /* ── MOBILE ── */
         @media (max-width: 640px) {
           .cta-card {
             padding: 36px 20px !important;
             border-radius: 16px !important;
           }
           .cta-title {
-            font-size: 28px !important;
-            line-height: 36px !important;
+            font-size: 26px !important;
+            line-height: 1.2 !important;
             white-space: normal !important;
             margin-bottom: 14px !important;
           }
@@ -112,12 +109,12 @@ export default function MigrateCTASection() {
           }
           .cta-btn-primary {
             width: 100% !important;
-            padding: 16px 24px !important;
+            padding: 14px 24px !important;
             font-size: 15px !important;
           }
           .cta-btn-secondary {
             width: 100% !important;
-            padding: 16px 24px !important;
+            padding: 14px 24px !important;
             font-size: 15px !important;
           }
         }
@@ -141,41 +138,38 @@ export default function MigrateCTASection() {
         <h2
           className="cta-title"
           style={{
-            margin: "0 0 20px",
+            margin: "0 0 16px",
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
-            fontSize: 52,
-            lineHeight: "60px",
-            letterSpacing: 0,
-            color: "#E6FFEE",
+            fontSize: "clamp(26px, 3.5vw, 44px)",
+            lineHeight: 1.15,
+            letterSpacing: "-0.5px",
+            color: "#ffffff",
             textAlign: "center",
-            whiteSpace: "nowrap",
             position: "relative",
             zIndex: 1,
           }}
         >
-          Ready to Migrate Smarter?
+          Ready to upgrade your migration<br />workflow?
         </h2>
 
         {/* Description */}
         <p
           className="cta-desc"
           style={{
-            margin: "0 auto 40px",
+            margin: "0 auto 32px",
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 400,
-            fontSize: 16,
-            lineHeight: "26px",
-            color: "rgba(230,255,238,0.75)",
-            maxWidth: 460,
+            fontSize: 15,
+            lineHeight: "24px",
+            color: "rgba(255,255,255,0.7)",
+            maxWidth: 380,
             textAlign: "center",
             position: "relative",
             zIndex: 1,
           }}
         >
-          Join 2.4 million WordPress sites already using MigrateAI. Start with
-          the free plan — no credit card, no commitment. Upgrade when you
-          need more power.
+          Start your first AI-powered backup in seconds.
         </p>
 
         {/* Buttons */}
@@ -186,13 +180,17 @@ export default function MigrateCTASection() {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            gap: 20,
+            gap: 12,
             position: "relative",
             zIndex: 1,
           }}
         >
-          <button type="button" onClick={scrollToTop} className="cta-btn-primary">Start Free Now</button>
-          <a href="/docs" className="cta-btn-secondary">Read the Documentation</a>
+          <button type="button" onClick={scrollToTop} className="cta-btn-primary">
+            Get Started for Free
+          </button>
+          <a href="/pricing" className="cta-btn-secondary">
+            Compare All Plans
+          </a>
         </div>
       </div>
     </section>

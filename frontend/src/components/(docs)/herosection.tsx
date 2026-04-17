@@ -8,7 +8,7 @@ export default function DocsHero() {
       <header style={{
         position: "relative",
         overflow: "hidden",
-        padding: "72px 64px 80px",
+        padding: "72px 120px 80px",
         background: "linear-gradient(135deg, #0a0f0c 60%, #051a10 100%)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>

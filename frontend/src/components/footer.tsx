@@ -4,12 +4,12 @@ function ColTitle({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: 11,
-      fontWeight: 700,
-      color: "#fff",
-      letterSpacing: "1px",
-      textTransform: "uppercase",
-      marginBottom: 16,
+      fontSize: 13,
+      fontWeight: 600,
+      color: "#d1d5db",
+      letterSpacing: "0px",
+      textTransform: "none",
+      marginBottom: 14,
     }}>
       {children}
     </div>
@@ -31,48 +31,63 @@ export default function Footer() {
           padding: 3px 0;
           transition: color .2s;
           cursor: pointer;
+          line-height: 1.6;
         }
         .f-link:hover { color: #d1d5db; }
 
         .f-social-btn {
-          width: 36px; height: 36px; border-radius: 8px;
+          width: 32px; height: 32px; border-radius: 50%;
           border: 1px solid #1f2937; background: #111827;
           display: flex; align-items: center; justify-content: center;
           cursor: pointer; transition: border-color .2s;
           flex-shrink: 0;
+          overflow: hidden;
+          padding: 0;
         }
         .f-social-btn:hover { border-color: #00C96B; }
+
+        .f-social-icon {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+        }
 
         .f-legal-link {
           font-family: 'DM Sans', sans-serif;
           font-size: 12px;
           font-weight: 500;
-          color: #ffffff;
+          color: #6b7280;
           line-height: 24px;
           text-decoration: none;
           transition: color .2s;
           cursor: pointer;
           white-space: nowrap;
         }
-        .f-legal-link:hover { color: #9ca3af; }
+        .f-legal-link:hover { color: #d1d5db; }
 
-        /* ── Desktop (default) ── */
+        /* ── Desktop ── */
         .f-main {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 56px 32px 40px;
+          padding: 40px 48px 32px;
           display: grid;
-          grid-template-columns: 220px repeat(4, 1fr);
-          gap: 16px;
+          /* Wider brand col + bigger explicit gap before nav cols */
+          grid-template-columns: 320px 80px minmax(80px, auto) minmax(160px, auto) minmax(80px, auto) minmax(80px, auto);
+          gap: 0 0;
+          align-items: start;
         }
+
+        /* The spacer column creates the visual gap */
+        .f-spacer { grid-column: auto; }
 
         .f-brand { grid-column: auto; }
         .f-cols { display: contents; }
 
         .f-bottom {
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
-          padding: 20px 32px;
+          padding: 16px 48px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -81,15 +96,15 @@ export default function Footer() {
         .f-bottom-copyright {
           font-family: 'DM Sans', sans-serif;
           font-size: 12px;
-          font-weight: 500;
-          color: #ffffff;
+          font-weight: 400;
+          color: #6b7280;
           line-height: 24px;
           white-space: nowrap;
         }
 
         .f-bottom-links {
           display: flex;
-          gap: 24px;
+          gap: 20px;
           flex-shrink: 0;
         }
 
@@ -97,11 +112,12 @@ export default function Footer() {
         @media (max-width: 900px) {
           .f-main {
             grid-template-columns: 1fr 1fr 1fr !important;
-            gap: 32px 24px;
-            padding: 40px 24px 32px;
+            gap: 28px 20px !important;
+            padding: 32px 24px 24px;
           }
           .f-brand { grid-column: 1 / -1; }
-          .f-bottom { padding: 20px 24px; }
+          .f-spacer { display: none; }
+          .f-bottom { padding: 14px 24px; }
         }
 
         /* ── Mobile ── */
@@ -110,32 +126,24 @@ export default function Footer() {
             display: flex !important;
             flex-direction: column;
             gap: 0;
-            padding: 32px 16px 28px;
+            padding: 24px 16px 20px;
           }
-          .f-brand { margin-bottom: 32px; }
+          .f-brand { margin-bottom: 28px; }
+          .f-spacer { display: none; }
           .f-cols {
             display: grid !important;
             grid-template-columns: 1fr 1fr;
-            gap: 28px 16px;
+            gap: 24px 16px;
           }
-
-          /* Bottom bar: stack copyright on top, links below */
           .f-bottom {
-            padding: 14px 16px;
+            padding: 12px 16px;
             flex-direction: column;
             align-items: flex-start;
             gap: 6px;
           }
-          .f-bottom-copyright {
-            font-size: 12px;
-            white-space: normal;
-          }
-          .f-bottom-links {
-            gap: 20px;
-          }
-          .f-legal-link {
-            font-size: 12px;
-          }
+          .f-bottom-copyright { white-space: normal; }
+          .f-bottom-links { gap: 14px; }
+          .f-legal-link { font-size: 12px; }
         }
       `}</style>
 
@@ -144,7 +152,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div className="f-brand">
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
             <img
               src="/f1.svg"
               alt="MigrateAI"
@@ -152,30 +160,37 @@ export default function Footer() {
             />
             <span style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: 18, fontWeight: 800, color: "#fff",
+              fontSize: 16, fontWeight: 800, color: "#fff",
             }}>
               MigrateAI
             </span>
           </div>
-          <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.7, marginTop: 12, maxWidth: 320 }}>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 16,
+            fontWeight: 700,
+            color: "#ffffff",
+            lineHeight: 1.5,
+            margin: "0 0 14px",
+            maxWidth: 300,
+          }}>
             AI-powered WordPress backup, migration, and restore platform with intelligent
             automation, conflict prediction, and real-time recovery.
           </p>
-          <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+          <div style={{ display: "flex", gap: 8 }}>
             <div className="f-social-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-              </svg>
+              <img src="/Link (3).svg" alt="Link 3" className="f-social-icon" />
             </div>
             <div className="f-social-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 2H3v16h5v4l4-4h5l4-4V2zM11 11V7m4 4V7" />
-              </svg>
+              <img src="/Link (4).svg" alt="Link 4" className="f-social-icon" />
             </div>
           </div>
         </div>
 
-        {/* 4 link columns — 2x2 on mobile */}
+        {/* Spacer — creates the gap between brand and nav */}
+        <div className="f-spacer" />
+
+        {/* 4 link columns */}
         <div className="f-cols">
           <div>
             <ColTitle>Product</ColTitle>
@@ -241,7 +256,7 @@ export default function Footer() {
         <img
           src="/m1.svg"
           alt="MigrateAI"
-          style={{ width: "100%", height: "auto", display: "block", opacity: 0.5 }}
+          style={{ width: "100%", height: "auto", display: "block", opacity: 0.8 }}
         />
       </div>
     </footer>

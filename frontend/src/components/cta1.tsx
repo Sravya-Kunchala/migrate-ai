@@ -61,7 +61,6 @@ export default function MigrateCTASection() {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 16px;
           font-weight: 600;
-          border: none;
           border-radius: 48px;
           padding: 24px 48px;
           cursor: pointer;
@@ -88,15 +87,14 @@ export default function MigrateCTASection() {
           z-index: 0;
         }
 
-        /* ── MOBILE ── */
         @media (max-width: 640px) {
           .cta-card {
             padding: 36px 20px !important;
             border-radius: 16px !important;
           }
           .cta-title {
-            font-size: 28px !important;
-            line-height: 36px !important;
+            font-size: 26px !important;
+            line-height: 1.2 !important;
             white-space: normal !important;
             margin-bottom: 14px !important;
           }
@@ -144,8 +142,8 @@ export default function MigrateCTASection() {
             margin: "0 0 20px",
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
-            fontSize: 52,
-            lineHeight: "60px",
+            fontSize: "clamp(24px, 3vw, 40px)",
+            lineHeight: 1.2,
             letterSpacing: 0,
             color: "#E6FFEE",
             textAlign: "center",
@@ -154,7 +152,7 @@ export default function MigrateCTASection() {
             zIndex: 1,
           }}
         >
-          Ready to Migrate Smarter?
+          Ready to move with intelligence?
         </h2>
 
         {/* Description */}
@@ -173,9 +171,8 @@ export default function MigrateCTASection() {
             zIndex: 1,
           }}
         >
-          Join 2.4 million WordPress sites already using MigrateAI. Start with
-          the free plan — no credit card, no commitment. Upgrade when you
-          need more power.
+          Join 10,000+ developers who have automated their WordPress migrations
+          with MigrateAI.
         </p>
 
         {/* Buttons */}
@@ -191,8 +188,12 @@ export default function MigrateCTASection() {
             zIndex: 1,
           }}
         >
-          <button type="button" onClick={scrollToTop} className="cta-btn-primary">Start Free Now</button>
-          <a href="/docs" className="cta-btn-secondary">Read the Documentation</a>
+          <button type="button" onClick={scrollToTop} className="cta-btn-primary">
+            Get Started for Free
+          </button>
+          <a href="/demo" className="cta-btn-secondary">
+            Schedule a Demo
+          </a>
         </div>
       </div>
     </section>

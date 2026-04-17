@@ -153,7 +153,7 @@ export default function ContactPage() {
           background: #111720;
           border: 1px solid rgba(255,255,255,0.07);
           border-radius: 14px;
-          padding: 22px 20px;
+          padding: 28px 24px;
           transition: border-color .2s, transform .2s;
           cursor: default;
           height: 100%;
@@ -387,21 +387,36 @@ export default function ContactPage() {
             {channels.map((ch, i) => (
               <AnimBox key={i} animation="fadeUp" delay={0.15 + i * 0.08}>
                 <div className="ch-card">
+                  {/* Icon */}
                   <div style={{
-                    width: 36, height: 36, borderRadius: 9,
+                    width: 44, height: 44, borderRadius: 10,
                     background: "rgba(0,201,107,0.1)",
                     border: "1px solid rgba(0,201,107,0.2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: 14,
+                    marginBottom: 18,
                   }}>
                     {ch.icon}
                   </div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 6 }}>{ch.title}</div>
-                  <div style={{ fontSize: 12, color: "#00C96B", fontWeight: 600, marginBottom: 8 }}>{ch.email}</div>
+                  {/* Title */}
                   <div style={{
-                    fontSize: 11.5,
-                    color: "rgba(255,255,255,0.35)",
-                    lineHeight: 1.6,
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#fff",
+                    marginBottom: 8,
+                    lineHeight: 1.3,
+                  }}>{ch.title}</div>
+                  {/* Email */}
+                  <div style={{
+                    fontSize: 14,
+                    color: "#00C96B",
+                    fontWeight: 600,
+                    marginBottom: 10,
+                  }}>{ch.email}</div>
+                  {/* Desc */}
+                  <div style={{
+                    fontSize: 13,
+                    color: "rgba(255,255,255,0.4)",
+                    lineHeight: 1.65,
                     fontFamily: "'DM Sans', sans-serif",
                   }}>{ch.desc}</div>
                 </div>
@@ -427,11 +442,11 @@ export default function ContactPage() {
               }}
             >
               {/* Left — text */}
-              <div style={{ padding: "48px 44px" }}>
+              <div style={{ padding: "52px 48px" }}>
                 <h2 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 26, fontWeight: 800, color: "#fff",
-                  margin: "0 0 28px",
+                  fontSize: 32, fontWeight: 800, color: "#fff",
+                  margin: "0 0 32px",
                 }}>
                   Our Headquarters
                 </h2>
@@ -440,16 +455,16 @@ export default function ContactPage() {
                   { label: "Address", val: "Banjara Hills, Hyderabad,\nTelangana 500034, India" },
                   { label: "Operating Hours", val: "Monday – Friday\n9:00 AM – 6:00 PM IST" },
                 ].map((item) => (
-                  <div key={item.label} style={{ marginBottom: 22 }}>
+                  <div key={item.label} style={{ marginBottom: 26 }}>
                     <div style={{
-                      fontSize: 10, fontWeight: 700,
-                      letterSpacing: "1px", textTransform: "uppercase",
-                      color: "#00C96B", marginBottom: 5,
+                      fontSize: 11, fontWeight: 700,
+                      letterSpacing: "1.2px", textTransform: "uppercase",
+                      color: "#00C96B", marginBottom: 7,
                     }}>{item.label}</div>
                     <div style={{
-                      fontSize: 13,
-                      color: "rgba(255,255,255,0.6)",
-                      lineHeight: 1.6,
+                      fontSize: 15,
+                      color: "rgba(255,255,255,0.65)",
+                      lineHeight: 1.7,
                       fontFamily: "'DM Sans', sans-serif",
                       whiteSpace: "pre-line",
                     }}>{item.val}</div>
@@ -457,7 +472,7 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              {/* Right — s8.svg as background-image */}
+              {/* Right — map/image side */}
               <div
                 className="hq-image-side"
                 style={{
@@ -470,13 +485,11 @@ export default function ContactPage() {
                   backgroundRepeat: "no-repeat",
                 }}
               >
-                {/* Left fade so it blends with text side */}
                 <div style={{
                   position: "absolute",
                   inset: 0,
                   background: "linear-gradient(to right, rgba(17,23,32,0.75) 0%, transparent 55%)",
                 }} />
-                {/* Teal tint */}
                 <div style={{
                   position: "absolute",
                   inset: 0,

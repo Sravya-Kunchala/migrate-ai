@@ -77,7 +77,6 @@ export default function CoreBackupFeatures() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-        /* Desktop default — 3 column grid */
         .cbf-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -85,28 +84,26 @@ export default function CoreBackupFeatures() {
         }
 
         .cbf-section {
-          padding: 72px 54px;
+          padding: 72px 120px;
         }
 
-        /* Tablet — 2 columns */
         @media (max-width: 900px) {
           .cbf-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 32px 32px;
           }
           .cbf-section {
-            padding: 56px 32px;
+            padding: 56px 64px;
           }
         }
 
-        /* Mobile — 1 column */
         @media (max-width: 540px) {
           .cbf-grid {
             grid-template-columns: 1fr;
             gap: 28px;
           }
           .cbf-section {
-            padding: 40px 20px;
+            padding: 40px 28px;
           }
         }
       `}</style>

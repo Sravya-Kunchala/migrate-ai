@@ -1,4 +1,4 @@
-import MigrateCTASection from "../components/cta";
+import MigrateCTASection from "../components/cta1";
 import DevFeatures from "../components/devfeature";
 import CoreBackupFeatures from "../components/feature3";
 import CloudDestinations from "../components/feature4";

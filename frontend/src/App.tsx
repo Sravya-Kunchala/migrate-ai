@@ -8,10 +8,12 @@ import DocsPage from "./app/docs";
 import BlogPage from "./app/blog";
 import AboutPage from "./app/about";
 import ContactPage from "./app/contact";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 function App() {
   return (
     <>
+      <div id="page-top" />
       <style>{`
         /* ── Global mobile resets ── */
         *, *::before, *::after { box-sizing: border-box; }
@@ -143,6 +145,7 @@ function App() {
           <Route path="/about"    element={<AboutPage />} />
           <Route path="/contact"  element={<ContactPage />} />
         </Routes>
+        <ScrollToTopButton />
       </BrowserRouter>
     </>
   );

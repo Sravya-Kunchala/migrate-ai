@@ -163,6 +163,10 @@ export default function Hero() {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
         }
+        @keyframes hero-watermark-float {
+          0%, 100% { transform: translateX(-50%) translateY(0px) scale(1); }
+          50%       { transform: translateX(-50%) translateY(-18px) scale(1.02); }
+        }
 
         .hero-section {
           background: #0d0d0d;
@@ -171,26 +175,30 @@ export default function Hero() {
           text-align: center; overflow: hidden;
           font-family: 'Manrope', sans-serif;
           position: relative;
+          isolation: isolate;
         }
         .hero-watermark-logo {
-          position: fixed;
+          position: absolute;
           top: 0; left: 50%;
           transform: translateX(-50%);
           width: 100%; max-width: 1600px;
           height: auto; display: block;
-          opacity: 0.38; filter: grayscale(1) brightness(4);
+          opacity: 0.14; filter: grayscale(1) brightness(3.8);
           user-select: none; pointer-events: none;
           z-index: 0;
+          animation: hero-watermark-float 12s ease-in-out infinite;
+          will-change: transform;
+          transform-origin: center top;
         }
         .hero-badge {
           display: inline-flex; align-items: center; gap: 8px;
-          background: rgba(105,246,184,0.3); border-radius: 9999px;
+          background: rgba(0,201,106,0.15); border: 1px solid rgba(0,201,106,0.3); border-radius: 9999px;
           padding: 6px 16px; margin-bottom: 20px;
           position: relative; z-index: 3;
           animation: badge-glow 3s ease-in-out infinite;
         }
-        .hero-badge-dot { color: #4ade80; font-size: 13px; }
-        .hero-badge-text { color: #aaa; font-size: 13px; }
+        .hero-badge-dot { color: #00C96A; font-size: 13px; }
+        .hero-badge-text { color: #00C96A; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
         .hero-title {
           color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: clamp(28px,5vw,60px); font-weight: 400;
@@ -417,7 +425,6 @@ export default function Hero() {
         .db-toast-title { font-size: 10.5px; font-weight: 700; color: #0f172a; font-family: 'Manrope', sans-serif; }
         .db-toast-sub { font-size: 8.5px; color: #64748b; font-family: 'Manrope', sans-serif; }
 
-        /* Metrics band */
         .hero-metrics {
           display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
           width: 100vw; max-width: none; background: #1F2937;
@@ -432,7 +439,6 @@ export default function Hero() {
         }
         .metric-label { color: #4ade80; font-size: 9px; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600; }
 
-        /* Ticker */
         .ticker-band {
           width: 100vw; max-width: none; background: #0a2e1f;
           border-top: 1px solid rgba(0,201,107,0.18); border-bottom: 1px solid rgba(0,201,107,0.18);
@@ -453,86 +459,39 @@ export default function Hero() {
         }
         .ticker-item:last-child::after { display: none; }
 
-        /* ===================== MOBILE FIXES ===================== */
         @media (max-width: 768px) {
           .hero-section { padding: 28px 1rem 0; }
-
           .hero-subtitle { font-size: 15px; }
           .hero-subtitle-bold { font-size: 17px; }
-
-          /* CTA buttons: full width, stacked, rounded rect */
           .hero-cta-group {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-            margin-bottom: 36px;
-            padding: 0;
-            width: 100%;
-            max-width: 100%;
+            flex-direction: column; align-items: stretch;
+            gap: 10px; margin-bottom: 36px;
+            padding: 0; width: 100%; max-width: 100%;
           }
-          .hero-btn-primary {
-            width: 100%;
-            max-width: 100%;
-            border-radius: 14px;
-            height: 56px;
-          }
+          .hero-btn-primary { width: 100%; max-width: 100%; border-radius: 14px; height: 56px; }
           .hero-btn-secondary {
-            width: 100%;
-            max-width: 100%;
-            border-radius: 14px;
-            height: 56px;
-            background: transparent;
-            color: #fff;
-            border: 1.5px solid rgba(255,255,255,0.25);
+            width: 100%; max-width: 100%; border-radius: 14px; height: 56px;
+            background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.25);
           }
-
           .hero-visual-wrap { margin-bottom: 36px; }
-
-          /* Dashboard: natural height */
           .db-inner { height: auto; }
-
-          /* Hide sidebar completely */
           .db-sidebar { display: none !important; }
-
-          /* Main takes full width */
           .db-main { width: 100%; }
-
-          /* Hide search bar */
           .db-search { display: none; }
-
-          /* Topbar: push to right */
           .db-topbar { justify-content: flex-end; }
-
-          /* Stats: 2x2 grid */
           .db-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-
-          /* Bottom panels: stack vertically */
           .db-bottom { grid-template-columns: 1fr; gap: 8px; }
-
-          /* Table: hide Type, Date, Size columns */
           .db-col-type, .db-col-date, .db-col-size { display: none !important; }
-
-          /* Toast: pull out of absolute, sit at bottom of shell */
           .db-toast {
-            position: relative;
-            bottom: auto; left: auto;
-            width: 100%;
-            min-width: unset;
-            margin-top: 8px;
-            border-radius: 0 0 12px 12px;
+            position: relative; bottom: auto; left: auto;
+            width: 100%; min-width: unset;
+            margin-top: 8px; border-radius: 0 0 12px 12px;
           }
-
-          /* Metrics: 2-col grid, 5th item spans full width centered */
           .hero-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px 16px;
-            padding: 28px 24px;
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 24px 16px; padding: 28px 24px;
           }
-          .metric-item:last-child {
-            grid-column: 1 / -1;
-            justify-self: center;
-          }
+          .metric-item:last-child { grid-column: 1 / -1; justify-self: center; }
         }
 
         @media (max-width: 400px) {
@@ -550,7 +509,7 @@ export default function Hero() {
       </div>
 
       <h1 className="hero-title" data-animate>
-        The World's First{" "}
+        The World's First<br />
         <span className="hero-title-accent">AI–Powered WordPress Backup & Migration</span>{" "}
         Plugin
       </h1>

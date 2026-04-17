@@ -82,15 +82,23 @@ export default function PricingSection() {
         .pricing-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 20px;
+          gap: 16px;
           width: 100%;
           max-width: 1020px;
           align-items: stretch;
         }
 
+        /* Each card is a flex column of equal height */
         .plan-card {
           border-radius: 20px;
-          padding: 28px 24px;
+          padding: 24px 22px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* The middle "body" of each card grows to fill available space */
+        .plan-card-body {
+          flex: 1;
           display: flex;
           flex-direction: column;
         }
@@ -99,7 +107,7 @@ export default function PricingSection() {
           display: flex;
           align-items: flex-start;
           gap: 9px;
-          margin-bottom: 9px;
+          margin-bottom: 7px;
         }
 
         .section-label {
@@ -108,6 +116,31 @@ export default function PricingSection() {
           letter-spacing: 0.08em;
           text-transform: uppercase;
           margin-bottom: 12px;
+        }
+
+        .price-row {
+          display: flex;
+          align-items: flex-end;
+          gap: 6px;
+          flex-wrap: nowrap;
+        }
+        .price-suffix {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          padding-bottom: 6px;
+        }
+        .price-per-year {
+          font-size: 13px;
+          color: rgba(255,255,255,0.4);
+          white-space: nowrap;
+          line-height: 1.3;
+        }
+        .price-per-month {
+          font-size: 11px;
+          color: rgba(255,255,255,0.28);
+          white-space: nowrap;
+          line-height: 1.3;
         }
 
         @media (max-width: 900px) {
@@ -126,7 +159,6 @@ export default function PricingSection() {
         overflow: "hidden",
       }}>
 
-        {/* Background decorative blue card frame */}
         <div style={{
           position: "absolute",
           bottom: 0,
@@ -143,209 +175,231 @@ export default function PricingSection() {
           zIndex: 0,
         }} />
 
-        {/* All content above the bg */}
         <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
 
-        {/* Badge */}
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: 6,
-          padding: "6px 18px", borderRadius: 9999,
-          background: "rgba(0,201,106,0.15)", border: "1px solid rgba(0,201,106,0.3)",
-          fontSize: 11, fontWeight: 600, color: "#00C96A", letterSpacing: "0.06em",
-          marginBottom: 28,
-        }}>
-          <span style={{ fontSize: 8 }}>●</span>
-          Honest Pricing · No Surprises · No Hidden Fees
-        </div>
+          {/* Badge */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 6,
+            padding: "6px 18px", borderRadius: 9999,
+            background: "rgba(0,201,106,0.15)", border: "1px solid rgba(0,201,106,0.3)",
+            fontSize: 11, fontWeight: 600, color: "#00C96A", letterSpacing: "0.06em",
+            marginBottom: 24,
+          }}>
+            <span style={{ fontSize: 8 }}>●</span>
+            Honest Pricing · No Surprises · No Hidden Fees
+          </div>
 
-        {/* Heading */}
-        <h2 style={{
-          fontSize: "clamp(32px,5vw,56px)", fontWeight: 800, color: "#ffffff",
-          margin: "0 0 16px", letterSpacing: "-1.5px", textAlign: "center",
-        }}>
-          Simple, Transparent Pricing
-        </h2>
+          {/* Heading */}
+          <h2 style={{
+            fontSize: "clamp(32px,5vw,56px)", fontWeight: 800, color: "#ffffff",
+            margin: "0 0 16px", letterSpacing: "-1.5px", textAlign: "center",
+          }}>
+            Simple, Transparent Pricing
+          </h2>
 
-        {/* Subtext */}
-        <p style={{
-          fontSize: 15, color: "rgba(255,255,255,0.45)", textAlign: "center",
-          maxWidth: 400, lineHeight: 1.6, margin: "0 0 32px",
-        }}>
-          Choose the plan that fits your workflow. Start free and upgrade when you need more power.
-        </p>
+          {/* Subtext */}
+          <p style={{
+            fontSize: 15, color: "rgba(255,255,255,0.45)", textAlign: "center",
+            maxWidth: 400, lineHeight: 1.6, margin: "0 0 26px",
+          }}>
+            Choose the plan that fits your workflow. Start free and upgrade when you need more power.
+          </p>
 
-        {/* Toggle */}
-        <div style={{
-          display: "inline-flex", alignItems: "center",
-          background: "rgba(255,255,255,0.06)", borderRadius: 9999, padding: 4,
-          marginBottom: 16, gap: 4,
-        }}>
-          {(["monthly", "annual"] as const).map((b) => (
-            <button key={b} onClick={() => setBilling(b)} style={{
-              padding: "7px 20px", borderRadius: 9999, border: "none",
-              background: billing === b ? "#ffffff" : "transparent",
-              color: billing === b ? "#0a0f0c" : "rgba(255,255,255,0.5)",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontWeight: 600, fontSize: 13, cursor: "pointer",
-              display: "flex", alignItems: "center", gap: 8,
+          {/* Toggle */}
+          <div style={{
+            display: "inline-flex", alignItems: "center",
+            background: "rgba(255,255,255,0.07)", borderRadius: 9999, padding: 4,
+            marginBottom: 14, gap: 2,
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}>
+            {(["monthly", "annual"] as const).map((b) => (
+              <button key={b} onClick={() => setBilling(b)} style={{
+                padding: "7px 20px", borderRadius: 9999, border: "none",
+                background: billing === b ? "#ffffff" : "transparent",
+                color: billing === b ? "#0a0f0c" : "rgba(255,255,255,0.45)",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 600, fontSize: 13, cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 8,
+                transition: "background 0.2s ease, color 0.2s ease",
+                whiteSpace: "nowrap",
+              }}>
+                {b === "monthly" ? "Monthly" : "Annual"}
+                {b === "annual" && (
+                  <span style={{
+                    background: "#00C96A", color: "#fff",
+                    fontSize: 10, fontWeight: 700, padding: "2px 8px",
+                    borderRadius: 9999, lineHeight: 1.6,
+                  }}>Save 21%</span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Note */}
+          <p style={{
+            fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center",
+            marginBottom: 48, lineHeight: 1.8,
+          }}>
+            Start free forever. Upgrade when you need more power. Cancel anytime. No long-term contracts.
+            <br />No setup fees. No per-migration charges.
+          </p>
+
+          {/* Cards */}
+          <div className="pricing-grid">
+
+            {/* FREE */}
+            <div className="plan-card" style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
             }}>
-              {b === "monthly" ? "Monthly" : "Annual"}
-              {b === "annual" && (
-                <span style={{
-                  background: "#00C96A", color: "#fff",
-                  fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 9999,
-                }}>Save 21%</span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Note */}
-        <p style={{
-          fontSize: 12, color: "rgba(255,255,255,0.3)", textAlign: "center",
-          marginBottom: 48, lineHeight: 1.8,
-        }}>
-          Start free forever. Upgrade when you need more power. Cancel anytime. No long-term contracts.
-          <br />No setup fees. No per-migration charges.
-        </p>
-
-        {/* Cards */}
-        <div className="pricing-grid">
-
-          {/* FREE */}
-          <div className="plan-card" style={{
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}>
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 10 }}>Free Plan</div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-                <span style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹0</span>
-                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>/forever</span>
+              {/* Header */}
+              <div style={{ marginBottom: 16 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 8 }}>Free Plan</div>
+                <div className="price-row">
+                  <span style={{ fontSize: 44, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹0</span>
+                  <div className="price-suffix">
+                    <span className="price-per-year">/forever</span>
+                  </div>
+                </div>
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 6, lineHeight: 1.5 }}>
+                  Perfect for personal blogs, test sites, and getting started.
+                </p>
               </div>
-              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 8, lineHeight: 1.6 }}>
-                Perfect for personal blogs, test sites, and getting started.
-              </p>
-            </div>
 
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 16, marginBottom: 16 }}>
-              <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Included</div>
-              {freePlanIncludes.map((item) => (
-                <div key={item} className="feature-row">
-                  <CheckIcon />
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>{item}</span>
+              {/* Body — grows to fill */}
+              <div className="plan-card-body">
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 14, marginBottom: 14 }}>
+                  <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Included</div>
+                  {freePlanIncludes.map((item) => (
+                    <div key={item} className="feature-row">
+                      <CheckIcon />
+                      <span style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <div style={{ marginBottom: 20 }}>
-              <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Not Included</div>
-              {freePlanNotIncluded.map((item) => (
-                <div key={item} className="feature-row">
-                  <CrossIcon />
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", lineHeight: 1.5 }}>{item}</span>
+                <div style={{ marginBottom: 16 }}>
+                  <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Not Included</div>
+                  {freePlanNotIncluded.map((item) => (
+                    <div key={item} className="feature-row">
+                      <CrossIcon />
+                      <span style={{ fontSize: 12, color: "rgba(255,255,255,0.25)", lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+
+                {/* Button pinned to bottom */}
+                <div style={{ marginTop: "auto" }}>
+                  <button className="pricing-btn" style={{
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    background: "rgba(255,255,255,0.06)", color: "#fff",
+                  }}>
+                    Download Free
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div style={{ marginTop: "auto" }}>
-              <button className="pricing-btn" style={{
-                border: "1px solid rgba(255,255,255,0.15)",
-                background: "rgba(255,255,255,0.06)", color: "#fff",
-              }}>
-                Download Free
-              </button>
-            </div>
-          </div>
-
-          {/* PRO */}
-          <div className="plan-card" style={{
-            background: "#0b1a13",
-            border: "2px solid #00C96A",
-            position: "relative",
-            boxShadow: "0 0 60px rgba(0,201,106,0.12)",
-          }}>
-            {/* Badge */}
-            <div style={{
-              position: "absolute", top: -16, left: "50%", transform: "translateX(-50%)",
-              background: "#00C96A", color: "#fff", fontSize: 12, fontWeight: 700,
-              padding: "5px 20px", borderRadius: 9999, whiteSpace: "nowrap",
+            {/* PRO */}
+            <div className="plan-card" style={{
+              background: "#0b1a13",
+              border: "2px solid #00C96A",
+              position: "relative",
+              boxShadow: "0 0 60px rgba(0,201,106,0.12)",
             }}>
-              Most Popular
-            </div>
-
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 10 }}>Pro Plan</div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 6, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹3,499</span>
-                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>/year</span>
-              </div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 4 }}>(₹291/month)</div>
-              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 8, lineHeight: 1.6 }}>
-                Best for freelancers, developers, and growing businesses.
-              </p>
-            </div>
-
-            <div style={{ borderTop: "1px solid rgba(0,201,106,0.15)", paddingTop: 16, marginBottom: 20, flex: 1 }}>
-              <div className="section-label" style={{ color: "#00C96A" }}>All Features Included</div>
-              {proPlanFeatures.map((item) => (
-                <div key={item} className="feature-row">
-                  <CheckIcon />
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ marginTop: "auto" }}>
-              <button className="pricing-btn" style={{
-                border: "none", background: "#00C96A", color: "#fff",
-                boxShadow: "0 4px 24px rgba(0,201,106,0.35)",
+              <div style={{
+                position: "absolute", top: -16, left: "50%", transform: "translateX(-50%)",
+                background: "#00C96A", color: "#fff", fontSize: 12, fontWeight: 700,
+                padding: "5px 20px", borderRadius: 9999, whiteSpace: "nowrap",
               }}>
-                Start Pro — ₹3,499/yr
-              </button>
-            </div>
-          </div>
-
-          {/* AGENCY */}
-          <div className="plan-card" style={{
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.08)",
-          }}>
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 10 }}>Agency Plan</div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 6, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹8,999</span>
-                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>/year</span>
+                Most Popular
               </div>
-              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 4 }}>(₹749/month)</div>
-              <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 8, lineHeight: 1.6 }}>
-                For WordPress agencies managing multiple client sites professionally.
-              </p>
-            </div>
 
-            <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 16, marginBottom: 20, flex: 1 }}>
-              <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Everything in Pro, Plus</div>
-              {agencyPlanFeatures.map((item) => (
-                <div key={item} className="feature-row">
-                  <CheckIcon />
-                  <span style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>{item}</span>
+              {/* Header */}
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 10 }}>Pro Plan</div>
+                <div className="price-row">
+                  <span style={{ fontSize: 44, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹3,499</span>
+                  <div className="price-suffix">
+                    <span className="price-per-year">/year</span>
+                    <span className="price-per-month">(₹291/month)</span>
+                  </div>
                 </div>
-              ))}
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 6, lineHeight: 1.5 }}>
+                  Best for freelancers, developers, and growing businesses.
+                </p>
+              </div>
+
+              {/* Body — grows to fill */}
+              <div className="plan-card-body">
+                <div style={{ borderTop: "1px solid rgba(0,201,106,0.15)", paddingTop: 14, marginBottom: 16 }}>
+                  <div className="section-label" style={{ color: "#00C96A" }}>All Features Included</div>
+                  {proPlanFeatures.map((item) => (
+                    <div key={item} className="feature-row">
+                      <CheckIcon />
+                      <span style={{ fontSize: 12, color: "rgba(255,255,255,0.7)", lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: "auto" }}>
+                  <button className="pricing-btn" style={{
+                    border: "none", background: "#00C96A", color: "#fff",
+                    boxShadow: "0 4px 24px rgba(0,201,106,0.35)",
+                  }}>
+                    Start Pro — ₹3,499/yr
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <div style={{ marginTop: "auto" }}>
-              <button className="pricing-btn" style={{
-                border: "1px solid rgba(255,255,255,0.15)",
-                background: "rgba(255,255,255,0.06)", color: "#fff",
-              }}>
-                Start Agency — ₹8,999/yr
-              </button>
+            {/* AGENCY */}
+            <div className="plan-card" style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}>
+              {/* Header */}
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.1em", color: "#fff", textTransform: "uppercase", marginBottom: 10 }}>Agency Plan</div>
+                <div className="price-row">
+                  <span style={{ fontSize: 44, fontWeight: 800, color: "#fff", lineHeight: 1 }}>₹8,999</span>
+                  <div className="price-suffix">
+                    <span className="price-per-year">/year</span>
+                    <span className="price-per-month">(₹749/month)</span>
+                  </div>
+                </div>
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 8, lineHeight: 1.6 }}>
+                  For WordPress agencies managing multiple client sites professionally.
+                </p>
+              </div>
+
+              {/* Body — grows to fill */}
+              <div className="plan-card-body">
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 16, marginBottom: 20 }}>
+                  <div className="section-label" style={{ color: "rgba(255,255,255,0.3)" }}>Everything in Pro, Plus</div>
+                  {agencyPlanFeatures.map((item) => (
+                    <div key={item} className="feature-row">
+                      <CheckIcon />
+                      <span style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: "auto" }}>
+                  <button className="pricing-btn" style={{
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    background: "rgba(255,255,255,0.06)", color: "#fff",
+                  }}>
+                    Start Agency — ₹8,999/yr
+                  </button>
+                </div>
+              </div>
             </div>
+
           </div>
-
-        </div>
         </div>
       </section>
     </>
   );
 }
+

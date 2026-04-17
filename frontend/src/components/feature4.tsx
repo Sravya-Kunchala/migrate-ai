@@ -220,36 +220,6 @@ export default function CloudDestinations() {
             ))}
           </div>
         </div>
-
-        <div
-          className="cld-animate"
-          style={{ display: "flex", justifyContent: "center", marginTop: 40, padding: "0 48px" }}
-        >
-          <button
-            style={{
-              background: "transparent",
-              border: "1px solid rgba(0,201,107,0.35)",
-              color: "#00C96B",
-              borderRadius: 9999,
-              padding: "10px 28px",
-              fontSize: 13,
-              fontWeight: 700,
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              cursor: "pointer",
-              transition: "background 0.2s, transform 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,201,107,0.08)";
-              (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.03)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-              (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
-            }}
-          >
-            View All 30+ Destinations →
-          </button>
-        </div>
       </section>
     </>
   );
