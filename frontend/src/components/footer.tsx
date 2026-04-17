@@ -168,7 +168,7 @@ export default function Footer() {
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: 16,
-            fontWeight: 700,
+            fontWeight: 300,
             color: "#ffffff",
             lineHeight: 1.5,
             margin: "0 0 14px",
